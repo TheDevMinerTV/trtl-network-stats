@@ -1,0 +1,29 @@
+{
+  "name": "discord-jbt-stats",
+  "version": "1.0.0",
+  "description": "This discord bot delivers all important information about a TurtleCoin fork's network.",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node bot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheDevMinerTV/discord-jbt-stats.git"
+  },
+  "keywords": [
+    "discord",
+    "turtlecoin",
+    "rpc"
+  ],
+  "author": "TheDevMinerTV",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TheDevMinerTV/discord-jbt-stats/issues"
+  },
+  "homepage": "https://github.com/TheDevMinerTV/discord-jbt-stats#readme",
+  "dependencies": {
+    "discord.js": "^11.5.0",
+    "turtlecoin-rpc": "^0.14.1"
+  }
+}
