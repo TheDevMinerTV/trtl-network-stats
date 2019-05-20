@@ -136,12 +136,14 @@ setInterval(() => {
                 channel.fetchMessages({limit: 2}).then(msgs => {
                     msgs = msgs.array();
 
-                    if((msgs.length != 0 || msgs != undefined) && (msgs[0].author.tag === discord.user.tag && !keepOldStats))  {
+                    if(msgs.length == 0 || msgs == undefined) {
+                        updateMsg(channel, stats, time);
+                    } else if (msgs[0].author.tag === discord.user.tag && !keepOldStats)  {
                         console.log('Found message from me...\nDeleting and sending new stats...');
                         msgs[0].delete();
+                        
+                        updateMsg(channel, stats, time);
                     }
-
-                    updateMsg(channel, stats, time);
                 });
             }
 
@@ -159,12 +161,14 @@ setInterval(() => {
                 channel.fetchMessages({limit: 2}).then(msgs => {
                     msgs = msgs.array();
     
-                    if((msgs.length == 0 || msgs == undefined) && (msgs[0].author.tag === discord.user.tag && !keepOldStats)) {
+                    if(msgs.length == 0 || msgs == undefined) {
+                        updateMsg(channel, stats, time);
+                    } else if (msgs[0].author.tag === discord.user.tag && !keepOldStats)  {
                         console.log('Found message from me...\nDeleting and sending new stats...');
                         msgs[0].delete();
+                        
+                        updateMsg(channel, stats, time);
                     }
-    
-                    updateMsg(channel, stats);
                 });
             }
 
