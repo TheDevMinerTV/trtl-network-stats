@@ -1,6 +1,6 @@
-# Discord bot for JitBit network statistics
+# Discord bot for Tellurium network statistics
 
-This discord bot delivers all important information about a TurtleCoin fork's network.
+This discord bot delivers all important information about Tellurium's network.
 
 ## Forking this
 
