@@ -10,7 +10,7 @@ const discordToken = '<YOUR DISCORD TOKEN>';
 const daemonHost = '167.86.113.15';
 
 // ENTER THE IP PORT OF THE DAEMON HERE, FOR EXAMPLE 64023 FOR JITBIT
-const daemonPort = 32321;
+const daemonPort = 32322;
 
 // ENTER THE COIN'S NAME HERE, FOR EXAMPLE 'Tellurium' OR 'Oscillate'
 const coinName = 'Tellurium';
