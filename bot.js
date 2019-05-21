@@ -7,31 +7,31 @@ const DiscordJS = require('discord.js');
 const discordToken = '<YOUR DISCORD TOKEN>';
 
 // ENTER THE IP ADDRESS OR URL OF THE DAEMON HERE, FOR EXAMPLE '127.0.0.1' FOR A LOCAL NODE
-const daemonHost = '127.0.0.1';
+const daemonHost = '167.86.113.15';
 
 // ENTER THE IP PORT OF THE DAEMON HERE, FOR EXAMPLE 64023 FOR JITBIT
-const daemonPort = 64023;
+const daemonPort = 32321;
 
 // ENTER THE COIN'S NAME HERE, FOR EXAMPLE 'Tellurium' OR 'Oscillate'
-const coinName = 'JitBit';
+const coinName = 'Tellurium';
 
 // ENTER THE COIN'S TICKER HERE, FOR EXAMPLE 'JBT' FOR 'JitBit'
-const coinTicker = 'JBT';
+const coinTicker = 'TRLM';
 
 // ENTER THE LOGO'S URL HERE
-const logoURL = 'https://camo.githubusercontent.com/30c91f7d89c12f564332ab05775380670c8a3248/68747470733a2f2f692e6962622e636f2f4b734a6a784a352f6461772e706e67';
+const logoURL = 'https://avatars0.githubusercontent.com/u/49403874?s=460&v=4';
 
 // ENTER A HEX COLOR OR A RGB ARRAY FOR CUSTOMIZATION
-const msgColor = 0x7a89ff;
+const msgColor = 0x545b66;
 
 // ENTER THE NAME OF THE CHANNEL YOU WANT THE UPDATES IN HERE, FOR EXAMPLE 'Stats' or 'jitbit-stats'
-const msgChannel = 'jitbit-stats';
+const msgChannel = 'stats';
 
 // ENTER THE INTERVAL HERE (IN MILLISECONDS)
 const checkInterval = 5000;
 
 // SET TO TRUE IF BOT SHOULDN'T DELETE OLD STATISTICS
-const keepOldStats = false;
+const keepOldStats = true;
 //-----------------------------------------------------------------------------------------//
 
 
