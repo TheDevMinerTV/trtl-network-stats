@@ -61,8 +61,8 @@ function updateMsg(channel, stats, time) {
         .addField('Block reward', `${stats.reward} ${coinTicker}`)
         .addField('Last blockhash', stats.lastHash)
         .addField('Timestamp of last block', stats.timestamp)
-        .addField('Transactions in last block', `${stats.numTxnsInside} transactions`)
-        .addField('Pending transactions', `${stats.numTxnsPending} transactions`)
+        .addField('Transactions in last block', `${stats.numTxnsInside} transaction(s)`)
+        .addField('Pending transactions', `${stats.numTxnsPending} transaction(s)`)
         .addField('Softfork number', stats.softFork)
         .addField('Hardfork number', stats.hardFork)
     );
@@ -126,6 +126,7 @@ setInterval(() => {
 
         if (lastStats.height !== stats.height) {
             for(let guild of discord.guilds.array()) {
+                console.log('Finding channel ' + msgChannel + ' in guild ' + guild.name + '...');
                 channel = guild.channels.find(channel => channel.name === msgChannel);
             
                 if (channel == undefined) {
@@ -133,7 +134,8 @@ setInterval(() => {
                     continue;
                 }
 
-                channel.fetchMessages({limit: 2}).then(msgs => {
+		            console.log('Found channel ' + channel.name + ' in guild ' + guild.name);
+                channel.fetchMessages({limit: 1}).then(msgs => {
                     msgs = msgs.array();
 
                     if(msgs.length == 0 || msgs == undefined) {
@@ -141,9 +143,10 @@ setInterval(() => {
                     } else if (msgs[0].author.tag === discord.user.tag && !keepOldStats)  {
                         console.log('Found message from me...\nDeleting and sending new stats...');
                         msgs[0].delete();
-                        
                         updateMsg(channel, stats, time);
-                    }
+                    } else {
+	                      updateMsg(channel, stats, time);
+		                }
                 });
             }
 
@@ -151,24 +154,27 @@ setInterval(() => {
             return;
         } else if (lastStats.numTxnsPending !== stats.numTxnsPending) {
             for(let guild of discord.guilds.array()) {
+                console.log('Finding channel ' + msgChannel + ' in guild ' + guild.name + '...');
                 channel = guild.channels.find(channel => channel.name === msgChannel);
-                
+
                 if (channel == undefined) {
                     console.log('Guild ' + guild.name + ' (' + guild.nameAcronym + ') doesn\'t have a channel for me :(');
                     continue;
                 }
-    
-                channel.fetchMessages({limit: 2}).then(msgs => {
+
+                console.log('Found channel ' + channel.name + ' in guild ' + guild.name);
+                channel.fetchMessages({limit: 1}).then(msgs => {
                     msgs = msgs.array();
-    
+
                     if(msgs.length == 0 || msgs == undefined) {
                         updateMsg(channel, stats, time);
                     } else if (msgs[0].author.tag === discord.user.tag && !keepOldStats)  {
                         console.log('Found message from me...\nDeleting and sending new stats...');
                         msgs[0].delete();
-                        
                         updateMsg(channel, stats, time);
-                    }
+                    } else {
+	                      updateMsg(channel, stats, time);
+		                }
                 });
             }
 
