@@ -48,26 +48,6 @@ const discord = new DiscordJS.Client();
 
 lastStats = false;
 
-function updateMsg(channel, stats, time) {
-    channel.send('', new DiscordJS.RichEmbed()
-        .setColor(msgColor)
-        .setTitle(`__**${coinName} network statistics**__`)
-        .setDescription(`These are the network statistics of ${coinName}!`)
-        .setThumbnail(logoURL)
-        .setFooter(`Fetched: ${time}`)
-        .addField('Height', `${stats.height} blocks`)
-        .addField('Hashrate', `${stats.hashrate} h/s`)
-        .addField('Difficulty', stats.difficulty)
-        .addField('Block reward', `${stats.reward} ${coinTicker}`)
-        .addField('Last blockhash', stats.lastHash)
-        .addField('Timestamp of last block', stats.timestamp)
-        .addField('Transactions in last block', `${stats.numTxnsInside} transaction(s)`)
-        .addField('Pending transactions', `${stats.numTxnsPending} transaction(s)`)
-        .addField('Softfork number', stats.softFork)
-        .addField('Hardfork number', stats.hardFork)
-    );
-}
-
 setInterval(() => {
 
     stats = {
@@ -124,6 +104,23 @@ setInterval(() => {
         now = new Date(Date.now());
         time = `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()} @ ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
 
+        let contentEmbed = new DiscordJS.RichEmbed()
+            .setColor(msgColor)
+            .setTitle(`__**${coinName} network statistics**__`)
+            .setDescription(`These are the network statistics of ${coinName}!`)
+            .setThumbnail(logoURL)
+            .setFooter(`Fetched: ${time}`)
+            .addField('Height', `${stats.height} blocks`)
+            .addField('Hashrate', `${stats.hashrate} h/s`)
+            .addField('Difficulty', stats.difficulty)
+            .addField('Block reward', `${stats.reward} ${coinTicker}`)
+            .addField('Last blockhash', stats.lastHash)
+            .addField('Timestamp of last block', stats.timestamp)
+            .addField('Transactions in last block', `${stats.numTxnsInside} transaction(s)`)
+            .addField('Pending transactions', `${stats.numTxnsPending} transaction(s)`)
+            .addField('Softfork number', stats.softFork)
+            .addField('Hardfork number', stats.hardFork);
+            
         if (lastStats.height !== stats.height) {
             for(let guild of discord.guilds.array()) {
                 console.log('Finding channel ' + msgChannel + ' in guild ' + guild.name + '...');
@@ -134,19 +131,18 @@ setInterval(() => {
                     continue;
                 }
 
-		            console.log('Found channel ' + channel.name + ' in guild ' + guild.name);
+		        console.log('Found channel ' + channel.name + ' in guild ' + guild.name);
                 channel.fetchMessages({limit: 1}).then(msgs => {
                     msgs = msgs.array();
 
                     if(msgs.length == 0 || msgs == undefined) {
-                        updateMsg(channel, stats, time);
+	                    channel.send('', contentEmbed);
                     } else if (msgs[0].author.tag === discord.user.tag && !keepOldStats)  {
-                        console.log('Found message from me...\nDeleting and sending new stats...');
-                        msgs[0].delete();
-                        updateMsg(channel, stats, time);
+                        console.log('Found message from me...\nEditing for new stats...');
+                        msgs[0].edit(embed=contentEmbed);
                     } else {
-	                      updateMsg(channel, stats, time);
-		                }
+	                    channel.send('', contentEmbed);
+		            }
                 });
             }
 
@@ -167,14 +163,13 @@ setInterval(() => {
                     msgs = msgs.array();
 
                     if(msgs.length == 0 || msgs == undefined) {
-                        updateMsg(channel, stats, time);
+	                    channel.send('', contentEmbed);
                     } else if (msgs[0].author.tag === discord.user.tag && !keepOldStats)  {
-                        console.log('Found message from me...\nDeleting and sending new stats...');
-                        msgs[0].delete();
-                        updateMsg(channel, stats, time);
+                        console.log('Found message from me...\nEditing for new stats...');
+                        msgs[0].edit(embed=contentEmbed);
                     } else {
-	                      updateMsg(channel, stats, time);
-		                }
+	                    channel.send('', contentEmbed);
+		            }
                 });
             }
 
