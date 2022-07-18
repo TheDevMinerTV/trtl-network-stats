@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/TheDevMinerTV/discord-jbt-stats#readme",
   "dependencies": {
-    "discord.js": "^11.5.1",
+    "discord.js": "^14.0.1",
     "turtlecoin-rpc": "^1.0.3"
   }
 }
